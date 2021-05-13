@@ -1,11 +1,10 @@
+import {API_KEY, API_URL} from './settings'
 
 
-const apiKey = 'X9HkXQh8IUUUIHmSkE417dPe3XBZG25C'
-
-const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=DRAGON BALL&limit=25&offset=0&rating=g&lang=en`
-
-export default function getGifs ({keyword}) {
-
+export default function getGifs ({limit = 25, keyword = 'gohan'} = {} ) {
+    
+    const apiUrl = `${API_URL}/gifs/search?api_key=${API_KEY}&q=${keyword}&limit=${limit}&offset=0&rating=g&lang=en`
+    
     return fetch(apiUrl)
         .then(response => response.json())
         .then(response => {
