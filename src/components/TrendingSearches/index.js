@@ -1,38 +1,15 @@
-import { useState, useEffect } from "react"
-import getTrendingTerms from 'services/getTrendingTerms'
-import Category from 'components/Category'
+import React, {Suspense} from 'react'
+import useNearScreen from 'hooks/useNearScreen'
 
-export function TrendingSearches () {
-    const [trends, setTrends] = useState([])
+    const TrendingSearches = React.lazy(() => import('./TrendingSearches'))
 
-    useEffect(function () { 
-        getTrendingTerms().then(setTrends)
-    }, [])
-
-    return <Category name='Tendencias' options={trends} />
-}
-
-export default function LazyTrending () {
-    const [show, setShow] = useState(false)
-
-    useEffect(function () {
-        const onChange = (entries) => {
-            const el = entries[0]
-            if (el.isIntersecting) {
-                setShow(true)
-            }
-        } 
-
-        const observer = new IntersectionObserver(onChange, {
-            rootMargin: '100px'
-        })
-
-        observer.observe(document.getElementById('LazyTrending'))
-
-    })
-
-    return <div>
-        {show ? <TrendingSearches /> : null}
+export function LazyTrending () {
+    const {isNearScreen, fromRef} = useNearScreen({distance: "200px"})
+    
+    return <div ref={fromRef}>
+        <Suspense fallback={'estoy cargando'} >
+            {isNearScreen ? <TrendingSearches /> : null}
+        </ Suspense >
     </div>
 
 }

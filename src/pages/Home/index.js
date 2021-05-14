@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { useLocation, Link } from 'wouter'
 import ListOfGifs from 'components/ListOfGifs'
-import useGifs from 'hooks/useGifs'
-import {TrendingSearches} from 'components/TrendingSearches'
+import {useGifs} from 'hooks/useGifs'
+import {LazyTrending} from 'components/TrendingSearches/index'
 
 export default function Home () {
 
     const [keyword, setKeyword] = useState('')
     const [path, pushLocation] = useLocation('')
 
-    const gifs = useGifs(keyword)
+    const {gifs} = useGifs(keyword)
 
     const handleSubmit = (evt) => {
         evt.preventDefault()
@@ -30,7 +30,7 @@ export default function Home () {
                 <ListOfGifs gifs={gifs} />
             </div>
             <div>
-              <TrendingSearches />
+                <LazyTrending />
             </div>
         </div>
     )
