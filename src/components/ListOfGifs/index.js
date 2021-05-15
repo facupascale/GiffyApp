@@ -1,8 +1,9 @@
 import Gif from 'components/Gif'
+import './ListOfGifs.css'
 
 export default function ListOfGifs ({gifs}) {
 
-    return <>
+    return <div className='ListOfGifs'>
         {
             gifs.map(({title, id, url}) => 
                 <Gif 
@@ -13,5 +14,5 @@ export default function ListOfGifs ({gifs}) {
                 />
             )
         }
-    </>
+    </div>
 }

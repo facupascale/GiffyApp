@@ -3,6 +3,7 @@ import { useLocation, Link } from 'wouter'
 import ListOfGifs from 'components/ListOfGifs'
 import {useGifs} from 'hooks/useGifs'
 import {LazyTrending} from 'components/TrendingSearches/index'
+import './Home.css'
 
 export default function Home () {
 
@@ -25,8 +26,8 @@ export default function Home () {
             <form onSubmit={handleSubmit}> 
                 <input placeholder='Search your gif here...' value={keyword} type='text'  onChange={handleChange} /> <button type='submit'> Enviar </button>
             </form>
-            <div>
-                <h3>Ultima busqueda</h3>
+            <div className='UltimaBusqueda'>
+                <h3 className='title'>Ultima busqueda</h3>
                 <ListOfGifs gifs={gifs} />
             </div>
             <div>
